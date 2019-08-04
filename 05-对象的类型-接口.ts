@@ -23,6 +23,9 @@ function printLabel(labelledObj: LabelledValue): void {
 
 let myObj = { size: 10, label: "Size 10 Object" };
 printLabel(myObj);
+let myObj0 = {};
+// printLabel(myObj0); // 缺少属性label
+printLabel(myObj0 as LabelledValue); // 类型断言
 // printLabel({size: 10, label: "Size 10 Object"}); // 使用对象字面量直接传递的话 会进行属性检查
 
 //对象字面量传递可以使用类型断言绕过属性检查
@@ -96,3 +99,51 @@ let ddog: Dog = new Dog();
 let samlldog: SmallDog = new SmallDog();
 ddog = samlldog; // 可行
 // samlldog = ddog; // 不行 缺少color
+samlldog = ddog as SmallDog; // 类型断言
+
+interface NumberDictionary {
+    [index: string]: number,
+    length: number,
+    // name: string // 不是number类型的子类型
+}
+
+interface ArrayDictionary {
+    [index: string]: Array<Object>,
+    // name: Object // 不是Array<number>类型的子类型
+    name: Array<number>
+}
+
+// 设置索引签名为只读 防止给索引赋值
+interface ReadonlyStringArray {
+    readonly [index: number]: string
+}
+
+let arr2: ReadonlyStringArray = ["1", "2", "3"];
+// arr2[0] = "3";
+
+// 类类型
+// 实现接口 接口描述了一个类的公共部分 而不是公共和私有两部分 他不会检查一个类是否具有某些私有部分
+interface ClockInterface {
+    currentTime: Date;
+    setTime(d: Date);
+}
+
+class Clock implements ClockInterface {
+    currentTime: Date;
+    setTime(d: Date) {
+        this.currentTime = d;
+    }
+    constructor(h: number, m: number) {}
+}
+
+// 类静态部分和实例部分的区别
+// 类是具有两个类型的：静态部分的类型和实例的类型
+// 当用一个构造器签名去定义一个接口并试图定义一个类去实现这个接口时会得到一个报错
+interface ClockConstructor {
+    new (hour: number, minute: number);
+}
+
+class Clock0 implements ClockConstructor {
+    currentTime: Date;
+    constructor(hour: number, minute: number) {}
+}

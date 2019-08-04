@@ -21,6 +21,9 @@ function printLabel(labelledObj) {
 }
 var myObj = { size: 10, label: "Size 10 Object" };
 printLabel(myObj);
+var myObj0 = {};
+// printLabel(myObj0); // 缺少属性label
+printLabel(myObj0); // 类型断言
 // printLabel({size: 10, label: "Size 10 Object"}); // 使用对象字面量直接传递的话 会进行属性检查
 //对象字面量传递可以使用类型断言绕过属性检查
 printLabel({ size: 10, label: "" });
@@ -69,3 +72,18 @@ var ddog = new Dog();
 var samlldog = new SmallDog();
 ddog = samlldog; // 可行
 // samlldog = ddog; // 不行 缺少color
+samlldog = ddog; // 类型断言
+var arr2 = ["1", "2", "3"];
+var Clock = /** @class */ (function () {
+    function Clock(h, m) {
+    }
+    Clock.prototype.setTime = function (d) {
+        this.currentTime = d;
+    };
+    return Clock;
+}());
+var Clock0 = /** @class */ (function () {
+    function Clock0(hour, minute) {
+    }
+    return Clock0;
+}());
