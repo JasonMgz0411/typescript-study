@@ -25,7 +25,7 @@ class DigitalClock implements ClockInterface {
     }
 }
 
-// 变量clock指定ClockConstructor构造器类型检查
+// 变量clock指定ClockConstructor 赋值时会检查变量是否符合构造函数签名
 function createClock(clock: ClockConstructor, hour: number, minute: number): ClockInterface {
     return new clock(hour, minute);
 }

@@ -68,6 +68,10 @@ interface Point3d extends Point {
 }
 
 let position: Point3d = {x: 1, y: 1, z: 1};
+let pos = <Point3d>{};
+pos.x = 1;
+pos.y = 2;
+pos.z = 3;
 
 // 使用接口定义一个函数需要符合的形状
 interface SearchFunc {
