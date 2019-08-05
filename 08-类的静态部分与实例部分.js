@@ -1,18 +1,18 @@
-// TS中的静态部分指的是类本身
-// TS中的实例部分指的是实例化出来的对象
+// class Clock implements ClockConstructor {
+//     constructor(hour: number, minute: number) { }
+//     a: number = 1;
+// }
+// 报错原因：当类实现一个接口时只对实例部分进行类型检查，而constructor位于静态部分，所以不在检查范围内
 var DigitalClock = /** @class */ (function () {
-    function DigitalClock(hour, minute) {
-        this.n = 2;
+    function DigitalClock() {
     }
-    DigitalClock.tick = function () {
-        console.log("digital static tick", this.n);
-    };
     DigitalClock.prototype.tick = function () {
-        console.log("digital new tick", this.n);
+        console.log("digital new tick");
     };
-    DigitalClock.n = 1;
+    DigitalClock.a = 1;
     return DigitalClock;
 }());
-DigitalClock.n;
-DigitalClock.tick();
-new DigitalClock(12, 14).tick();
+function createClock(clock, hour, minute) {
+    return new clock(hour, minute);
+}
+createClock(DigitalClock, 12, 12);
