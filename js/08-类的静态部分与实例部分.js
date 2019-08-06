@@ -1,3 +1,4 @@
+"use strict";
 // class Clock implements ClockConstructor {
 //     constructor(hour: number, minute: number) { }
 //     a: number = 1;
@@ -12,6 +13,7 @@ var DigitalClock = /** @class */ (function () {
     DigitalClock.a = 1;
     return DigitalClock;
 }());
+// 变量clock指定ClockConstructor 赋值时会检查变量是否符合构造函数签名
 function createClock(clock, hour, minute) {
     return new clock(hour, minute);
 }

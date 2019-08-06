@@ -1,3 +1,4 @@
+"use strict";
 // 布尔类型
 var boolA = Boolean(0);
 var boolB = Boolean(1);

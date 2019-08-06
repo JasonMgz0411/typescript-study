@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -41,7 +42,7 @@ stensen = function (sou, sub) {
 };
 var arr0 = {
     0: "1",
-    "1": "2"
+    "1": "2",
 };
 arr0 = ["1"];
 // arr0 = [1];

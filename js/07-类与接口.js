@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -62,3 +63,17 @@ var Car1 = /** @class */ (function () {
     };
     return Car1;
 }());
+// 接口继承类
+var Point = /** @class */ (function () {
+    function Point() {
+    }
+    return Point;
+}());
+var position = { x: 1, y: 1, z: 1 };
+var pos = {};
+pos.x = 1;
+pos.y = 2;
+pos.z = 3;
+var mySearch = function (source, subString) {
+    return !!source.search(subString);
+};
