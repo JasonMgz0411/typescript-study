@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -53,24 +52,27 @@ var arr1 = [1, 2, 3, 4];
 var obj = arr1; // 可行因为Object为Array的父类  Array有Object的所有属性与方法
 // arr1 = obj; // 不行
 var Dog = /** @class */ (function () {
-    function Dog() {
+    function Dog(name) {
+        this.name = name;
     }
     return Dog;
 }());
 var SmallDog = /** @class */ (function (_super) {
     __extends(SmallDog, _super);
-    function SmallDog() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function SmallDog(color, name) {
+        var _this = _super.call(this, name) || this;
+        _this.color = color;
+        return _this;
     }
     return SmallDog;
 }(Dog));
 var xiaod = {
-    0: new SmallDog(),
+    0: new SmallDog('black', "sd"),
     // "1": new Dog(), 
-    "test": new Dog()
+    "test": new Dog("d")
 };
-var ddog = new Dog();
-var samlldog = new SmallDog();
+var ddog = new Dog("d");
+var samlldog = new SmallDog("block", "sd");
 ddog = samlldog; // 可行
 // samlldog = ddog; // 不行 缺少color
 samlldog = ddog; // 类型断言

@@ -5,19 +5,19 @@ interface Animal {
     name: string;
 }
 // 两种断言表示方式
-let dog = <Animal>{};
-let pig = {} as Animal;
-dog.name = "dog";
-pig.name = "pig";
-dog.eat = () => {
-    console.log("dog eat");
+let dog09 = <Animal>{};
+let pig09 = {} as Animal;
+dog09.name = "dog09";
+pig09.name = "pig09";
+dog09.eat = () => {
+    console.log("dog09 eat");
 };
-pig.eat = () => {
-    console.log("pig eat");
+pig09.eat = () => {
+    console.log("pig09 eat");
 };
-dog.run = () => {
-    console.log("dog run");
+dog09.run = () => {
+    console.log("dog09 run");
 };
-pig.run = () => {
-    console.log("pig run");
+pig09.run = () => {
+    console.log("pig09 run");
 };

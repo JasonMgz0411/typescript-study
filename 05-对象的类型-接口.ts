@@ -34,22 +34,22 @@ printLabel({ size: 10, label: "" } as LabelledValue);
 // printLabel();
 
 // 函数类型
-interface Animal {
+interface Animal05 {
     (source: string, subString: string): boolean
 }
 
-let jason: Animal;
+let jason: Animal05;
 jason = function (source: string, subString: string): boolean {
     return !!(source.search(subString) + 1);
 }
 
-let tomsen: Animal;
-tomsen = function(sou: string, sub: string): boolean {
+let tomsen: Animal05;
+tomsen = function (sou: string, sub: string): boolean {
     return !!(sou.search(sub) + 1);
 }
 
-let stensen: Animal;
-stensen = function(sou, sub): boolean {
+let stensen: Animal05;
+stensen = function (sou, sub): boolean {
     return !!(sou.search(sub) + 1);
 }
 
@@ -73,15 +73,21 @@ arr0 = ["1"];
 // 也可以使用两种类型的索引  但是数字类型的索引的返回值必须是字符串类型索引返回值的子类型
 // 由于数字的索引其实也会转成字符串的索引 所以数字类型的索引的返回值必须是字符串类型索引返回值的子类型
 // 原理等同于下面的例子
-let arr1: Array<number> = [1,2,3,4];
+let arr1: Array<number> = [1, 2, 3, 4];
 let obj: Object = arr1; // 可行因为Object为Array的父类  Array有Object的所有属性与方法
 // arr1 = obj; // 不行
 class Dog {
-    name: string
+    name: string;
+    constructor(name: string) { this.name = name }
 }
 
-class SmallDog extends Dog{
+class SmallDog extends Dog {
     color: string
+    constructor(color: string, name: string) {
+        super(name);
+        this.color = color;
+    }
+
 }
 
 interface ddd {
@@ -90,13 +96,13 @@ interface ddd {
 }
 
 let xiaod: ddd = {
-    0: new SmallDog(),
+    0: new SmallDog('black', "sd"),
     // "1": new Dog(), 
-    "test": new Dog()
+    "test": new Dog("d")
 }
 
-let ddog: Dog = new Dog();
-let samlldog: SmallDog = new SmallDog();
+let ddog: Dog = new Dog("d");
+let samlldog: SmallDog = new SmallDog("block", "sd");
 ddog = samlldog; // 可行
 // samlldog = ddog; // 不行 缺少color
 samlldog = ddog as SmallDog; // 类型断言
@@ -125,7 +131,7 @@ let arr2: ReadonlyStringArray = ["1", "2", "3"];
 // 实现接口 接口描述了一个类的公共部分 而不是公共和私有两部分 他不会检查一个类是否具有某些私有部分
 interface ClockInterface {
     currentTime: Date;
-    setTime(d: Date);
+    setTime(d: Date): void;
 }
 
 class Clock implements ClockInterface {
@@ -139,11 +145,10 @@ class Clock implements ClockInterface {
 // 类静态部分和实例部分的区别
 // 类是具有两个类型的：静态部分的类型和实例的类型
 // 当用一个构造器签名去定义一个接口并试图定义一个类去实现这个接口时会得到一个报错
-interface ClockConstructor {
-    new (hour: number, minute: number);
+interface ClockConstructor05 {
+    new(hour: number, minute: number): void;
 }
 
-class Clock0 implements ClockConstructor {
-    currentTime: Date;
-    constructor(hour: number, minute: number) {}
+class Clock0 implements ClockConstructor05 {
+    constructor(hour: number, minute: number) { }
 }

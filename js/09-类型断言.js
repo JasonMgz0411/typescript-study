@@ -1,18 +1,17 @@
-"use strict";
 // 两种断言表示方式
-var dog = {};
-var pig = {};
-dog.name = "dog";
-pig.name = "pig";
-dog.eat = function () {
-    console.log("dog eat");
+var dog09 = {};
+var pig09 = {};
+dog09.name = "dog09";
+pig09.name = "pig09";
+dog09.eat = function () {
+    console.log("dog09 eat");
 };
-pig.eat = function () {
-    console.log("pig eat");
+pig09.eat = function () {
+    console.log("pig09 eat");
 };
-dog.run = function () {
-    console.log("dog run");
+dog09.run = function () {
+    console.log("dog09 run");
 };
-pig.run = function () {
-    console.log("pig run");
+pig09.run = function () {
+    console.log("pig09 run");
 };
