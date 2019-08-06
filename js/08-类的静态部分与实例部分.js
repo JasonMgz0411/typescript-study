@@ -1,3 +1,4 @@
+"use strict";
 // class Clock implements ClockConstructor {
 //     constructor(hour: number, minute: number) { }
 //     a: number = 1;

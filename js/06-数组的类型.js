@@ -1,3 +1,4 @@
+"use strict";
 var nums = [1, 2, 3, 4, 5];
 // let nums1: number[] = [1, "2"]; // 不能包含其他类型的数据
 nums.push(8);

@@ -1,3 +1,4 @@
+"use strict";
 // 联合类型
 // 在未确认变量具体类型时只能调用共有的属性或者方法
 var togetherData;
