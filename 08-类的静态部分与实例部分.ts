@@ -31,3 +31,21 @@ function createClock(clock: ClockConstructor, hour: number, minute: number): Clo
 }
 
 createClock(DigitalClock, 12, 12)
+
+// 使用接口定义一个函数需要符合的形状
+interface TimeClock {
+    (hour: number, minute: number): boolean;
+    getTime(): string;
+}
+
+
+let CurrentTime: TimeClock = (() => {
+    function s(hour:number, minute: number): boolean {
+        return hour > minute;
+    }
+    s.getTime = function() {
+        return "";
+    }
+    return s;
+})();
+// CurrentTime(TimeClass, 1, 1);
