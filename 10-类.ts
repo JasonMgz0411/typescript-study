@@ -100,3 +100,50 @@ let pa = new ParamAnimal("", 1, 50);
 // pa.name; // 私有的 只能在定义的类中进行访问
 pa.age;
 // pa.weight; // 只能在定义的类和此类的派生类中进行访问
+
+// set get 存取器
+class Employes {
+    private password: string;
+    private _fullName: string;
+    get fullName(): string {
+        return this._fullName;
+    }
+    set fullName(name: string) {
+        if(this.password) {
+            this._fullName = name;
+        } else {
+            console.info("ERROR: no pass!!!");
+        }
+    }
+    constructor(pass: string) {
+        this._fullName = "";
+        this.password = pass;
+    }
+}
+
+new Employes("1").fullName;
+new Employes("").fullName;
+
+// 抽象类
+abstract class Book {
+    constructor(public word: string) {}
+    abstract drawWord(): void;
+    read(): void {
+        console.log("读书");
+    }
+}
+
+class SmallBook extends Book {
+    constructor() {
+        super("Hello");
+    }
+    drawWord(): void {
+        console.log(this.word);
+    }
+    destory() {}
+}
+
+const sb: Book = new SmallBook();
+sb.drawWord();
+sb.read();
+// sb.destory();
