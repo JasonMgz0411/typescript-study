@@ -59,16 +59,21 @@ interface Card {
     suit: string;
     card: number;
 }
+
+let card: Card = {
+    suit: "1",
+    card: 1
+};
 interface Deck {
     suits: string[];
     cards: number[];
-    createCardPicker(this: Deck): () => Card;
+    createCardPicker(this: Deck): () => Card; // createCardPicker返回值是个返回值是Card类型的函数
 }
 let deck: Deck = {
     suits: ["hearts", "spades", "clubs", "diamonds"],
     cards: Array(52),
-    createCardPicker: function () {
-        return () => {
+    createCardPicker: function (this: Deck) {
+        return (): Card => {
             let pickedCard = Math.floor(Math.random() * 52);
             let pickedSuit = Math.floor(pickedCard / 13);
             return { suit: this.suits[pickedSuit], card: pickedCard % 13 };
