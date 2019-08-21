@@ -85,3 +85,15 @@ let cardPicker = deck.createCardPicker();
 let pickedCard = cardPicker();
 
 alert("card: " + pickedCard.card + " of " + pickedCard.suit);
+
+class Handler {
+    info: string = "";
+    onClickBad(this: Handler, e: Event) {
+        this.info = e.toString();
+    }
+}
+
+interface UIElement {
+    addClickEvent(onclick: (this: void, e: Event) => void): void;
+}
+
