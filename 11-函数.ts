@@ -88,7 +88,19 @@ alert("card: " + pickedCard.card + " of " + pickedCard.suit);
 
 class Handler {
     info: string = "";
-    onClickBad(this: Handler, e: Event) {
+    /**
+     * 函数声明：挂载到原型链上的函数 Handler.prototype.onClickBad
+     */
+    onClickBad(this: Handler, e: Event) { // 指定this必须为Handler的实例
+        this.info = e.toString();
+    }
+    onClickBad1(this: void, e: Event) {
+        console.log("clicked"); // 无法使用this调用Handler实例的属性 例如this.info
+    }
+    /**
+     * 函数表达式：挂载到构造器内部this上的函数 同this.info的挂载方式
+     */
+    onClickBad2 = (e: Event) => {
         this.info = e.toString();
     }
 }
@@ -97,3 +109,29 @@ interface UIElement {
     addClickEvent(onclick: (this: void, e: Event) => void): void;
 }
 
+class UIElementClass implements UIElement {
+    addClickEvent(onclick: (this: void, e: Event) => void) {
+        onclick(new Event("click"));
+    }
+}
+
+let uiEle: UIElement = new UIElementClass();
+let h = new Handler();
+// uiEle.addClickEvent(h.onClickBad); // 作为回调函数 this被替换成void报错
+uiEle.addClickEvent(h.onClickBad1);
+uiEle.addClickEvent(h.onClickBad2);
+
+// 重载 
+// 场景：根据不同类型的入参返回不同类型的数据
+function pickData(x: number): Array<number>;
+function pickData(x: Array<any>): number;
+function pickData(x: any): any {
+    if(typeof x == "object") {
+        return x.length;
+    } else {
+        return [x];
+    }
+}
+pickData(1);
+pickData([1]);
+// pickData({}); // 不在定义的重载列表中 报错
