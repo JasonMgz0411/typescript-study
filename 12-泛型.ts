@@ -67,3 +67,67 @@ class GennerNumber<T> {
 
 let genNum = new GennerNumber<number>();
 genNum.add = function (x, y) { return x + y };
+genNum.zeroVal = 1;
+genNum.add(1, 2);
+// 类有两部分：静态部分与实例部分 泛型类指的是对实例部分的类型 类的静态属性不能使用泛型类型
+
+// 泛型约束
+// 当我们想要获取某种类型的指定属性时 但又不确定具体类型 我们可以使用接口制定约束条件 确保参数都是满足此条件的
+interface WishLength {
+    length: number;
+}
+
+function logLength<T extends WishLength>(arg: T): T {
+    console.log(arg.length);
+    return arg;
+}
+
+logLength({ length: 1 });
+logLength([]);
+// logLength(1);
+
+// 在泛型约束中使用类型参数
+
+let type: keyof { a: 1, b: 2, c: 3 } = "a";
+// 等同于
+let type1: "a" | "b" | "c" = "a";
+
+function getProperty<S, U extends keyof S>(obj: S, key: U): S[U] {
+    return obj[key];
+}
+
+//在泛型约束中使用类类型
+function create<T>(a: { new(): T }): T {
+    return new a();
+}
+
+class BeeKeeper {
+    hasMask: boolean
+}
+
+class ZooKeeper {
+    nametag: string;
+}
+
+class AnimalZ {
+    numLegs: number;
+}
+
+class Bee extends AnimalZ {
+    keeper: BeeKeeper
+}
+
+class Zoo extends AnimalZ {
+    keeper: ZooKeeper
+}
+
+function findKeeper<T extends AnimalZ, U>(a: {
+    new(): T,
+    prototype: {
+        keeper: U
+    }
+}): U {
+    return a.prototype.keeper;
+}
+
+findKeeper(Zoo).nametag;
