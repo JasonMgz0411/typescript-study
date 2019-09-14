@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -112,3 +111,53 @@ var pa = new ParamAnimal("", 1, 50);
 // pa.name; // 私有的 只能在定义的类中进行访问
 pa.age;
 // pa.weight; // 只能在定义的类和此类的派生类中进行访问
+// set get 存取器
+var Employes = /** @class */ (function () {
+    function Employes(pass) {
+        this._fullName = "";
+        this.password = pass;
+    }
+    Object.defineProperty(Employes.prototype, "fullName", {
+        get: function () {
+            return this._fullName;
+        },
+        set: function (name) {
+            if (this.password) {
+                this._fullName = name;
+            }
+            else {
+                console.info("ERROR: no pass!!!");
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Employes;
+}());
+new Employes("1").fullName;
+new Employes("").fullName;
+// 抽象类
+var Book = /** @class */ (function () {
+    function Book(word) {
+        this.word = word;
+    }
+    Book.prototype.read = function () {
+        console.log("读书");
+    };
+    return Book;
+}());
+var SmallBook = /** @class */ (function (_super) {
+    __extends(SmallBook, _super);
+    function SmallBook() {
+        return _super.call(this, "Hello") || this;
+    }
+    SmallBook.prototype.drawWord = function () {
+        console.log(this.word);
+    };
+    SmallBook.prototype.destory = function () { };
+    return SmallBook;
+}(Book));
+var sb = new SmallBook();
+sb.drawWord();
+sb.read();
+// sb.destory();

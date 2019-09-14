@@ -1,4 +1,3 @@
-"use strict";
 // 两种断言表示方式
 var dog09 = {};
 var pig09 = {};

@@ -1,4 +1,3 @@
-"use strict";
 // class Clock implements ClockConstructor {
 //     constructor(hour: number, minute: number) { }
 //     a: number = 1;
@@ -18,3 +17,13 @@ function createClock(clock, hour, minute) {
     return new clock(hour, minute);
 }
 createClock(DigitalClock, 12, 12);
+var CurrentTime = (function () {
+    function s(hour, minute) {
+        return hour > minute;
+    }
+    s.getTime = function () {
+        return "";
+    };
+    return s;
+})();
+// CurrentTime(TimeClass, 1, 1);
