@@ -64,3 +64,85 @@ function animalRun(animal: Bird | Fish) {
     }
 }
 
+// 4、typeof类型保护  
+// typeof类型保护只有两种形式可以识别  typeof value === ‘typename’ 和 typeof value !== 'typename'
+// typename必须是string number boolean symbol 才可以被识别为typeof类型保护
+// 当然ts并未强行要求不能为其他字符串  只是其他字符串不会被识别为typeof类型保护
+
+function getPaddingLeft(value: string, padding: string | number) {
+    if(typeof padding === 'number') {
+        return `${Array(padding + 1).join(" ")}${value}`
+    }
+    if(typeof padding === 'string') {
+        return `${padding}${value}`
+    }
+    throw new Error(`padding不是合法的参数类型`);
+}
+
+// 5、instanceof类型保护
+interface Padder {
+    getPaddingString(): string;
+}
+
+class SpaceRegisterPadder implements Padder {
+    constructor(private value: number) {}
+    getPaddingString(): string {
+        return `${Array[this.value + 1].join(" ")}`;
+    }
+}
+
+class StringPadder implements Padder {
+    constructor(private value: string) {}
+    getPaddingString(): string {
+        return this.value;
+    }
+}
+
+function getRandomPadder() {
+    return Math.random() > 0.5 ? new SpaceRegisterPadder(4) : new StringPadder("");
+}
+
+let padder: Padder = getRandomPadder();
+if(padder instanceof SpaceRegisterPadder) {
+    console.log("SpaceRegisterPadder");
+}
+if(padder instanceof StringPadder) {
+    console.log("StringPadder");
+}
+
+// 6、使用strictNullChecks标记时 当声明一个变量时 它不会自动的包含null或者undefined  可以使用联合类型包含它们
+let str: string = "foo";
+// str = null;
+
+let str1: string | null = "foo";
+str1 = null;
+// str1 = undefined; 
+
+let str3: string | undefined = "foo";
+// str3 = null;
+str3 = undefined;
+
+let str2: string | null | undefined = "foo";
+str2 = null;
+str2 = undefined; 
+
+// 7、使用strictNullChecks标记时 可选参数与可选属性上会默认自动加上 undefined
+// tag处理后的类型为 number | undefined
+function getTag(tag?: number) {}
+getTag(1);
+getTag(undefined);
+// getTag(null);
+
+class TagsString {
+    s?: number
+}
+
+let tags: TagsString = new TagsString();
+tags.s = 1;
+tags.s = undefined;
+// tags.s = null;
+
+// 8、类型保护与类型断言 value!可以从value的类型里去除null和undefined
+let name1: string | null;
+// console.log(name1.charAt(0) + "world");
+console.log(name1!.charAt(0) + "world");
