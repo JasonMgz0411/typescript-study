@@ -146,3 +146,58 @@ tags.s = undefined;
 let name1: string | null;
 // console.log(name1.charAt(0) + "world");
 console.log(name1!.charAt(0) + "world");
+
+// 9、类型别名
+// 给一个类型起个名字
+type Name = string;
+type NameResolver = () => string;
+type NameOrResolver = Name | NameResolver;
+function getName(name: NameOrResolver): Name {
+    if(typeof name === "string") {
+        return name;
+    }
+    return name();
+}
+
+// 类型别名也可以使泛型
+type Container<T> = {
+    value: T
+};
+
+// 也可以在属性里引用自己
+type Select<T> = {
+    value: T,
+    id: string,
+    parentId: string,
+    childen: Array<Select<T>>
+};
+
+// 与交叉类型一起使用
+type Droper<T> = T & {next: Droper<T>};
+interface Ele {
+    value: string,
+    id: string,
+    next: Ele
+}
+
+class Eleme implements Ele {
+    value: string
+    id: string
+    next: Eleme
+}
+
+let droper: Droper<Ele> = new Eleme();
+droper.value;
+droper.next.value;
+droper.next.next.value;
+droper.next.next.next.value;
+
+// 类型别名不能出现在声明右侧的任何地方
+// type Yikes = Array<Yikes>;
+
+// 10、接口与类型别名的区别
+// 接口是创建了一个新的类型 而类型别名只是创建了个名字用来引用一个类型，只是一个类型的别名而已
+// 接口可以被继承和实现 而类型别名不行
+// 类型别名通常用来描述一个类型并且需要使用离岸和类型或者元组类型
+
+// 11、字符串字面量类型
