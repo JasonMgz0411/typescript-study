@@ -383,3 +383,37 @@ type Keys = "option1" | "option2";
 type Flags = {
     [K in Keys]: boolean
 }
+
+// 映射类型 + 联合类型
+type PickValue<T, K extends keyof T> = {
+    [P in K]: T[P]
+};
+
+type FunctionPropertyName<T> = {
+    [K in keyof T]: T[K] extends Function ? K : never;
+}[keyof T];
+
+type FunctionPropertyValue<T> = PickValue<T, FunctionPropertyName<T>>;
+interface Part {
+    name: string;
+    age: number;
+    sort(a: number, b: number): boolean;
+    add(): void;
+    increment(): void;
+}
+
+type T40 = FunctionPropertyName<Part>;
+type T50 = FunctionPropertyValue<Part>;
+// 条件类型中的类型推断 infer
+// ep1
+type ParamType<T> = T extends (param: infer P) => any ? P : T;
+// 解析 T extends (param: infer P) => any ? P : T 条件语句中 infer P 表示推断出的函数参数
+// 整句表示 如果T能赋值给 (param: infer P) => any 结果为 (param: infer P) => any 中的P 否则返回T
+interface User {
+    name: string,
+    age: number
+}
+
+type Func = (user: User) => void;
+type Param = ParamType<Func>; // User
+type Paramstring = ParamType<string>; // string
